@@ -1,0 +1,15 @@
+.git
+.vscode
+out/test
+src
+.eslintrc.json
+.gitignore
+.vscode-test.mjs
+.vscodeignore
+CHANGELOG.md
+package-lock.json
+README.md
+tsconfig.json
+vsc-extension-quickstart.md
+workspace.code-workspace
+*.vsix

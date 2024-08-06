@@ -1,0 +1,90 @@
+{
+    "name": "quickcomments",
+    "displayName": "QuickComments",
+    "description": "A VSCode extension that automatically generates comments for selected code using OpenAI API.",
+    "version": "1.0.0",
+    "publisher": "pardnchiu",
+    "icon": "image/icon.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pardnchiu/vscode-quickcomments"
+    },
+    "engines": {
+        "vscode": "^1.91.1"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:quickcomments.addCodeComments"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "quickcomments.addCodeComments",
+                "title": "Add Code Comments"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "quickcomments.addCodeComments",
+                    "when": "editorHasSelection",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "command": "quickcomments.addCodeComments",
+                "key": "ctrl+alt+c",
+                "when": "editorTextFocus && editorHasSelection",
+                "mac": "cmd+option+c"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "properties": {
+                "quickcomments.api_key": {
+                    "type": "string",
+                    "default": "",
+                    "description": "API key for accessing OpenAI services"
+                }
+            },
+            "quickcomments.model": {
+                "type": "string",
+                "default": "gpt-4o",
+                "description": "Model to use for generating comments"
+            },
+            "quickcomments.max_tokens": {
+                "type": "number",
+                "default": 80,
+                "description": "Maximum number of tokens for the response"
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "vscode-test",
+        "package": "vsce package"
+    },
+    "devDependencies": {
+        "@types/mocha": "^10.0.7",
+        "@types/node": "20.x",
+        "@types/vscode": "^1.91.1",
+        "@typescript-eslint/eslint-plugin": "^7.14.1",
+        "@typescript-eslint/parser": "^7.11.0",
+        "@vscode/test-cli": "^0.0.9",
+        "@vscode/test-electron": "^2.4.0",
+        "eslint": "^8.57.0",
+        "typescript": "^5.4.5"
+    },
+    "dependencies": {
+        "axios": "^1.7.3"
+    }
+}
